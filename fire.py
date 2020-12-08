@@ -23,9 +23,19 @@ orange_mask = cv2.inRange(hsv, lower_orange, upper_orange)
 yellow_mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
 
 mask = red_mask+red2_mask+orange_mask+yellow_mask
+#mask = np.stack((combo_mask,)*2, axis=-1)
+
+#colored
+colored_mask = cv2.bitwise_or(img, img, mask=mask)
+#colored_mask = colored_mask[0:rows, 0:cols]
+
+output = red_mask+red2_mask+orange_mask+yellow_mask
+
 
 cv2.imshow('image', img)
 cv2.imshow('mask', mask)
+cv2.imshow('colored_mask', colored_mask)
+
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
